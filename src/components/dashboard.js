@@ -1,22 +1,24 @@
 import React from "react";
+import { Button } from "reactstrap";
 
 const Dashboard = props => {
   return (
     <div className="dashboard-container">
-      <section className="buttons">
+      <section className="Buttons">
         <div className="homeButtons">
           {/* TODO STEP 4 - Now we need to attach our state setter functions to click listeners. */}
-          <button
+          <Button
+            color="primary"
             className="homeButtons__touchdown"
             onClick={() => props.setBalls(addBall(props.balls))}
           >
             Ball
-          </button>
-          <button
+          </Button>
+          <Button
+            color="primary"
             className="homeButtons__fieldGoal"
             onClick={() => {
               let values = addStrike(props.strikes, props.outs);
-
               props.setStrikes(values[0]);
 
               if (props.outs !== values[1]) {
@@ -31,20 +33,21 @@ const Dashboard = props => {
                 }
                 props.setBalls(0);
               }
-
               props.setOuts(values[1]);
             }}
           >
             Strike
-          </button>
+          </Button>
 
-          <button
+          <Button
+            color="primary"
             className="awayButtons__touchdown"
             onClick={() => props.setStrikes(addFoul(props.strikes))}
           >
             Foul
-          </button>
-          <button
+          </Button>
+          <Button
+            color="primary"
             className="awayButtons__fieldGoal"
             onClick={() => {
               let values = addStrike(3, props.outs); // 3 strikes makes an auto out
@@ -58,14 +61,14 @@ const Dashboard = props => {
                 }
               }
               props.setBalls(0);
-
               props.setStrikes(0);
               props.setOuts(values[1]);
             }}
           >
             Out
-          </button>
-          <button
+          </Button>
+          <Button
+            color="primary"
             className="awayButtons__fieldGoal"
             onClick={() => {
               if (props.whosUp === "Home") {
@@ -73,13 +76,12 @@ const Dashboard = props => {
               } else {
                 props.setAwayHits(props.AwayHits + 1);
               }
-
               props.setStrikes(0);
               props.setBalls(0);
             }}
           >
             Hit
-          </button>
+          </Button>
         </div>
       </section>
     </div>
@@ -92,7 +94,6 @@ const addBall = prevCount => {
   if (newCount > 3) {
     newCount = 0;
   }
-
   return newCount;
 };
 
@@ -100,12 +101,10 @@ const addStrike = (prevStrike, prevOut) => {
   let newStrike = prevStrike + 1;
   let newOut = prevOut;
   console.log(prevStrike);
-
   if (newStrike > 2) {
     newStrike = 0;
     newOut = addOut(prevOut);
   }
-
   return [newStrike, newOut];
 };
 
